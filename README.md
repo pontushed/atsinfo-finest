@@ -1,4 +1,6 @@
-# Fullstack 2020 CI/CD test project - Phonebook
+# Example for FINEST ATS Information System configuration
 
-* [Heroku link to application](https://thawing-dawn-25992.herokuapp.com/)
+Provided are:
 
+- Backend using node.js, express, mongodb and server side events
+- Frontend with basic functionality and user authentication/authorisation
