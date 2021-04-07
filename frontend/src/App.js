@@ -123,7 +123,7 @@ const App = () => {
   const LoggedOut = () => (
     <div className="columns is-centered">
           <div className="column is-half">
-            <article className="message is-primary">
+            <article className="message is-info">
               <div className="message-header">
                 <p>Welcome! Please log in.</p>
               </div>
