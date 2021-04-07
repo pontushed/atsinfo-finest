@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import loginService from './services/login'
 import sectorConfService from './services/sectorconf'
 import diaryService from './services/diary'
+import Map from './components/Map'
 import './App.css'
 
 const App = () => {
@@ -137,9 +138,9 @@ const App = () => {
               </div>
             </div>
             <footer className="card-footer">
-              <a href="#" className="card-footer-item">Save</a>
-              <a href="#" className="card-footer-item">Edit</a>
-              <a href="#" className="card-footer-item">Delete</a>
+              <a href="#" className="card-footer-item">Button1</a>
+              <a href="#" className="card-footer-item">Button2</a>
+              <a href="#" className="card-footer-item">Button3</a>
             </footer>
           </div>
         </div>
@@ -151,17 +152,30 @@ const App = () => {
               </p>
             </header>
             <div className="card-content">
-              <div className="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-                <br/>
-                <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <div className="columns">
+                <div className="column">
+                  <Map/>
+                </div>
+                <div className="column">
+                  <p>EFIN</p>
+                  <button className="button is-small">CONF1</button>
+                  <button className="button is-small">CONF2</button>
+                  <button className="button is-small">CONF2A</button>
+                  <button className="button is-small">CONF2B</button>
+                  <p>EETT</p>
+                  <button className="button is-small">CONF1</button>
+                  <button className="button is-small">CF2</button>
+                  <button className="button is-small">CF2A</button>
+                  <button className="button is-small">CF3A</button>
+                  <button className="button is-small">CF3B</button>
+                  <button className="button is-small">CF5</button>
+                </div>
               </div>
             </div>
             <footer className="card-footer">
-              <a href="#" className="card-footer-item">Save</a>
-              <a href="#" className="card-footer-item">Edit</a>
-              <a href="#" className="card-footer-item">Delete</a>
+              <a href="#" className="card-footer-item">Button1</a>
+              <a href="#" className="card-footer-item">Button2</a>
+              <a href="#" className="card-footer-item">Button3</a>
             </footer>
           </div>
         </div>

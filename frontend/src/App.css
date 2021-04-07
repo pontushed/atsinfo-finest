@@ -1,1 +1,3 @@
-
+svg g.sector:hover {
+  cursor: pointer;
+}
