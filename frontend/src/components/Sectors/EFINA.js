@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles'
 
-const EFINA = ({ active, clickHandler }) => {
+const EFINA = ({ color, clickHandler }) => {
 
   return (
     <g className='sector' id="sec_efina" onClick={() => clickHandler('efina')}>
@@ -67,7 +67,7 @@ const EFINA = ({ active, clickHandler }) => {
           " id="m11935c3b69" style={styles.lineStyle} />
       </defs>
       <g clipPath="url(#pc284ee2ed3)">
-          <use style={styles.getFillStyle(active)}
+          <use style={styles.getFillStyle(color)}
               x="0" xlinkHref="#m11935c3b69" y="394.92" />
       </g>
   </g>)

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles'
 
-const EETTE = ({ active, clickHandler }) => {
+const EETTE = ({ color, clickHandler }) => {
 
   return (
     <g className='sector' id="sec_eette" onClick={() => clickHandler('eette')}>
@@ -64,7 +64,7 @@ const EETTE = ({ active, clickHandler }) => {
         " id="m68e6832a36" style={styles.lineStyle} />
     </defs>
     <g clipPath="url(#pc284ee2ed3)">
-        <use style={styles.getFillStyle(active)} x="0"
+        <use style={styles.getFillStyleEE(color)} x="0"
             xlinkHref="#m68e6832a36" y="394.92" />
     </g>
 </g>

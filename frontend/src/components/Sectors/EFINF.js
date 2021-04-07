@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles'
 
-const EFINF = ({ active, clickHandler }) => {
+const EFINF = ({ color, clickHandler }) => {
 
   return (
     <g className='sector' id="sec_efinf" onClick={() => clickHandler('efinf')}>
@@ -63,7 +63,7 @@ const EFINF = ({ active, clickHandler }) => {
             " id="mb3a3855776" style={styles.lineStyle} />
         </defs>
         <g clipPath="url(#pc284ee2ed3)">
-            <use style={styles.getFillStyle(active)}
+            <use style={styles.getFillStyle(color)}
                 x="0" xlinkHref="#mb3a3855776" y="394.92" />
         </g>
     </g>
