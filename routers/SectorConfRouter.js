@@ -63,14 +63,14 @@ sectorConfRouter.post('/', async (req, res, next) => {
   }
 
   // Send to other country!
-  if (req.app.locals.FOREIGN_API_TOKEN) {
+  if (req.app.locals.FOREIGN_API_TOKEN && !body.isSyncMessage) {
     const config = {
       headers: {
         'Authorization': 'bearer ' + req.app.locals.FOREIGN_API_TOKEN
       }
     }
     try {
-      await axios.post(conf.FOREIGN_API + '/sectorconf', body, config)
+      await axios.post(conf.FOREIGN_API + '/sectorconf',  { ...body, isSyncMessage:true }, config)
     } catch (e) {
       next(e)
     }
