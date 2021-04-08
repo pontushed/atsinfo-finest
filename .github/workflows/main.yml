@@ -17,24 +17,24 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm ci frontend
-        run: npm ci
-        working-directory: frontend
-      - name: lint frontend
-        run: npm run eslint
-        working-directory: frontend
+      #- name: npm ci frontend
+      #  run: npm ci
+      # working-directory: frontend
+      #- name: lint frontend
+      #  run: npm run eslint
+      #  working-directory: frontend
       # - name: test frontend jest tests
       #   run: npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/components/*
       #   working-directory: frontend
-      - name: npm ci backend
-        run: npm ci
+      #- name: npm ci backend
+      #  run: npm ci
       # - name: npm test backend
       #   run: npm run test
       #   env:
       #     MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
       #     SECRET: ${{secrets.SECRET}}
-      - name: lint backend
-        run: npm run eslint
+      #- name: lint backend
+      #  run: npm run eslint
       #- name: Cypress-run
       #  uses: cypress-io/github-action@v2
       #  with:
