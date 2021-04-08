@@ -6,6 +6,11 @@ const sectorConfSchema = mongoose.Schema({
     required: true,
     minlength: 1
   },
+  country: {
+    type: String,
+    required: true,
+    minlength: 1
+  },
   effectiveAt: {
     type: Date,
     required: true

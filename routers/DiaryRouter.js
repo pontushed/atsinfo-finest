@@ -60,8 +60,8 @@ diaryConfRouter.post('/', async (req, res, next) => {
   const diary = new Diary(obj)
   try {
     const savedDiary = await diary.save()
-    sse.sendEventsToAll(savedDiary, 'diary', 'new')
-    return res.json(savedDiary)
+    sse.sendEventsToAll(savedDiary.toJSON(), 'diary', 'new')
+    return res.json(savedDiary.toJSON())
   } catch (e) {
     next(e)
   }

@@ -4,6 +4,8 @@ import loginService from './services/login'
 import sectorConfService from './services/sectorconf'
 import diaryService from './services/diary'
 import MapConfs from './components/MapConfs'
+import DiaryMessage from './components/DiaryMessage'
+import SecConfMessage from './components/SecConfMessage'
 import './App.css'
 import logic from './logic/sectorConfs'
 
@@ -55,32 +57,47 @@ const App = () => {
         setSectorConfs(data)
       })
       diaryService.getAll().then(data => {
-        setDiary(data)
+        setDiary(diary.concat(data))
       })
     }
   }, [userObject])
 
-  useEffect(() => {
-    if (!listening && userObject) {
-      const events = new EventSource('http://localhost:3001/api/events')
+  const initializeEventSource = () => {
+    const events = new EventSource('http://localhost:3001/api/events')
+    
+    events.onopen = () => {
+      console.log('The EventSource connection has been established.')
       setEventSrc(events)
-
-      events.onmessage = (event) => {
-        const parsedData = JSON.parse(event.data)
-        handleMessage(parsedData)
-      }
       setListening(true)
     }
-  }, [listening, userObject])
 
-  const handleMessage = (data) => {
-    if (data.type === 'diary') {
-      setDiary(diary.concat(data.message))
+    events.onmessage = (event) => {
+      if (event.id == "CLOSE") {
+        events.close()
+        setListening(false) 
+      }
+      const parsedData = JSON.parse(event.data)
+      if (parsedData.type === 'diary') {
+        setDiary((diary) => [parsedData.message].concat(diary))
+      }
+      if (parsedData.type === 'secConf') {
+        setSectorConfs((sectorconfs) => [parsedData].concat(sectorconfs))
+        setConfInDisplay(parsedData.country, parsedData.title)
+      }
     }
-    if (data.type === 'sectorConf') {
-      setSectorConfs(sectorconfs.concat(data.message))
+
+    events.onerror = () => {
+      console.log('EventSource connection error')
+      events.close()
+      setListening(false)
     }
   }
+
+  useEffect(() => {
+    if (!listening && userObject) {
+      initializeEventSource()
+    }
+  }, [listening, userObject])
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -110,7 +127,19 @@ const App = () => {
     }
   }
 
-  const handleChangeConf = (country, conf) => {
+  const handleChangeConf = async (country, conf) => {
+    const confObject = {
+      title: conf,
+      country,
+      effectiveAt: new Date().toUTCString(),
+      issuer: userObject.username,
+      comment: ''      
+    }
+    await sectorConfService.create(confObject)
+    setConfInDisplay(country, conf)
+  }
+
+  const setConfInDisplay = (country, conf) => {
     const newSectorization = logic.sectorConfsColors(country, conf)
     if (country == 'EE') {
       setSectorColors([{...newSectorization}, sectorColors[1]])
@@ -167,10 +196,10 @@ const App = () => {
             </header>
             <div className="card-content">
               <div className="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-                <br/>
-                <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                {diary.slice(0,10).map((item,index) => (
+                  <DiaryMessage key={index} msg={item}/>
+                )
+                )}
               </div>
             </div>
             <footer className="card-footer">
@@ -205,6 +234,9 @@ const App = () => {
                   <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3A')}>CF3A</button>
                   <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3B')}>CF3B</button>
                   <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF5')}>CF5</button>
+                  {sectorconfs.slice(0,10).map((item,index) => (
+                    <SecConfMessage key={index} msg={item}/>
+                  ))}
                 </div>
               </div>
             </div>
@@ -217,11 +249,12 @@ const App = () => {
         </div>
       </div>
       <div className="columns is-centered">
-        <div className="column is-one-third">
+        <div className="column is-half">
           <div className="level">
-          <span>Logged in</span>
+          <span>Logged in as <strong>{userObject.username}</strong></span>
           <button className="button is-small" onClick={() => handleLogout()}>Logout</button>
           <span>Listening on Event Stream: {listening ? 'YES' : 'NO'}</span>
+          {!listening && (<button className="button is-small is-danger" onClick={() => setListening(null)}>Reconnect</button>)}
           </div>
         </div>
       </div>

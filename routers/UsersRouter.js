@@ -97,9 +97,13 @@ usersRouter.post('/reset', async (request, response) => {
   await SectorConf.deleteMany({})
   await User.deleteMany({})
   const passwordHash = await bcrypt.hash('finest', 10)
-  const user = new User({ username: 'finest', passwordHash })
+  const user = new User({ username: 'est', passwordHash })
   await user.save()
-  response.status(200).json({ message: 'Database is now reset for testing' })
+  const user2 = new User({ username: 'fin', passwordHash })
+  await user2.save()
+  const user3 = new User({ username: 'chief', passwordHash })
+  await user3.save()
+  response.status(200).json({ message: `Database is now reset for testing with users 'est' and 'fin'` })
 })
 
 module.exports = usersRouter

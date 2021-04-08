@@ -1,0 +1,72 @@
+name: ATSINFO FINEST CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm ci frontend
+        run: npm ci
+        working-directory: frontend
+      - name: lint frontend
+        run: npm run lint
+        working-directory: frontend
+      - name: test frontend jest tests
+        run: npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/components/*
+        working-directory: frontend
+      - name: npm ci backend
+        run: npm ci
+      - name: npm test backend
+        run: npm run test
+        env:
+          MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
+          SECRET: ${{secrets.SECRET}}
+      - name: lint backend
+        run: npm run lint
+      #- name: Cypress-run
+      #  uses: cypress-io/github-action@v2
+      #  with:
+      #    start: npm start, npm run start:test --prefix ../sankaristoorit-backend/
+      #    working-directory: frontend
+      #    wait-on: 'http://localhost:3001/tips, http://localhost:3000'
+      #    browser: chrome
+      #    wait-on-timeout: 20
+      #    record: true
+      # env:
+      #    CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_KEY}}
+      #    MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
+      #    SECRET: ${{secrets.SECRET}}
+      - name: Create coverage report
+        run: bash <(curl -s https://codecov.io/bash)
+      - name: Deploy Estonia
+        uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'atsinfo-finest-est'
+          heroku_email: 'pontus.hedlund@gmail.com'
+        env:
+          MONGODB_URI_EST: ${{secrets.MONGODB_URI_EST}}
+          COUNTRY: Estonia
+          HD_SECRET: ${{secrets.SECRET}}
+      - name: Deploy Finland
+        uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'atsinfo-finest-est'
+          heroku_email: 'pontus.hedlund@gmail.com'
+        env:
+          MONGODB_URI_FIN: ${{secrets.MONGODB_URI_FIN}}
+          COUNTRY: Finland
+          HD_SECRET: ${{secrets.SECRET}}

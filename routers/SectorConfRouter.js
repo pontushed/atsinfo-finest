@@ -46,8 +46,15 @@ sectorConfRouter.post('/', async (req, res, next) => {
     })
   }
 
+  if (!body.country) {
+    return res.status(400).json({
+      error: 'country missing'
+    })
+  }
+
   const obj = {
     title: body.title,
+    country: body.country,
     effectiveAt: body.effectiveAt,
     comment: body.comment,
     issuer: body.issuer
@@ -56,8 +63,8 @@ sectorConfRouter.post('/', async (req, res, next) => {
   const sectorconf = new SectorConf(obj)
   try {
     const savedSectorConf = await sectorconf.save()
-    sse.sendEventsToAll(savedSectorConf, 'secConf', 'new')
-    return res.json(savedSectorConf)
+    sse.sendEventsToAll(savedSectorConf.toJSON(), 'secConf', 'new')
+    return res.json(savedSectorConf.toJSON())
   } catch (e) {
     next(e)
   }
@@ -93,8 +100,15 @@ sectorConfRouter.put('/:id', (req, res, next) => {
     })
   }
 
+  if (!body.country) {
+    return res.status(400).json({
+      error: 'country missing'
+    })
+  }
+
   const obj = {
     title: body.title,
+    country: body.country,
     effectiveAt: body.effectiveAt,
     comment: body.comment,
     issuer: body.issuer
@@ -107,4 +121,10 @@ sectorConfRouter.put('/:id', (req, res, next) => {
     })
     .catch(error => next(error))
 })
+
+sectorConfRouter.post('/test', (req, res, next) => {
+  res.json(req.body)
+  sse.sendEventsToAll(req.body, 'secConf', 'test')
+})
+
 module.exports = sectorConfRouter

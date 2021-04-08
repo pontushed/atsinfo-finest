@@ -9,6 +9,8 @@ const eventsHandler = (request, response, next) => {
     'Cache-Control': 'no-cache'
   }
   response.writeHead(200, headers)
+  // Write a welcome message. This will only inform the browser about the connection.
+  response.write(`ATSINFO EVENT STREAM\n\n`)
 
   const clientId = uuidv4()
 
