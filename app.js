@@ -7,6 +7,7 @@ const usersRouter = require('./routers/UsersRouter')
 const loginRouter = require('./routers/LoginRouter')
 const diaryRouter = require('./routers/DiaryRouter')
 const sse = require('./utils/serverSideEvents')
+const axios = require('axios')
 
 const mongoose = require('mongoose')
 const errors = require('./utils/errors')
@@ -27,6 +28,18 @@ mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: 
   .catch((error) => {
     console.log('error connecting to MongoDB: ', error.message)
   })
+
+console.log('connecting to foreign API: ' + conf.FOREIGN_API)
+
+app.locals.FOREIGN_API_TOKEN = null
+axios.post( conf.FOREIGN_API + '/login', { username: 'chief', password: 'finest' })
+  .then(response => {
+    if (response.data.token) {
+      console.log('Token received from foreign API.')
+      app.locals.FOREIGN_API_TOKEN = response.data.token
+    } else throw new Error('Error getting token from foreign API')
+  })
+  .catch(error => console.log(error))
 
 app.use(cors())
 app.use(express.json())

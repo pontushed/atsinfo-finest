@@ -103,7 +103,7 @@ usersRouter.post('/reset', async (request, response) => {
   await user2.save()
   const user3 = new User({ username: 'chief', passwordHash })
   await user3.save()
-  response.status(200).json({ message: `Database is now reset for testing with users 'est' and 'fin'` })
+  response.status(200).json({ message: 'Database is now reset for testing with users \'est\',\'fin\' and \'chief\'' })
 })
 
 module.exports = usersRouter

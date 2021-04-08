@@ -1,8 +1,10 @@
 const sectorConfRouter = require('express').Router()
+const conf = require('../utils/config')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const SectorConf = require('../models/SectorConf')
 const sse = require('../utils/serverSideEvents')
+const axios = require('axios')
 
 sectorConfRouter.get('/', (req, res) => {
   SectorConf.find({}).then(confs => {
@@ -58,6 +60,20 @@ sectorConfRouter.post('/', async (req, res, next) => {
     effectiveAt: body.effectiveAt,
     comment: body.comment,
     issuer: body.issuer
+  }
+
+  // Send to other country!
+  if (req.app.locals.FOREIGN_API_TOKEN) {
+    const config = {
+      headers: {
+        'Authorization': 'bearer ' + req.app.locals.FOREIGN_API_TOKEN
+      }
+    }
+    try {
+      await axios.post(conf.FOREIGN_API + '/sectorconf', body, config)
+    } catch (e) {
+      next(e)
+    }
   }
 
   const sectorconf = new SectorConf(obj)

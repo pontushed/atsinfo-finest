@@ -2,8 +2,10 @@ const diaryConfRouter = require('express').Router()
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const Diary = require('../models/Diary')
-const { response } = require('express')
 const sse = require('../utils/serverSideEvents')
+const conf = require('../utils/config')
+const axios = require('axios')
+
 
 diaryConfRouter.get('/', (req, res) => {
   Diary.find({}).then(confs => {
@@ -53,6 +55,20 @@ diaryConfRouter.post('/', async (req, res, next) => {
     description: body.description,
     unit: body.unit,
     issuer: body.issuer
+  }
+
+  // Send to other country!
+  if (req.app.locals.FOREIGN_API_TOKEN) {
+    const config = {
+      headers: {
+        'Authorization': 'bearer ' + req.app.locals.FOREIGN_API_TOKEN
+      }
+    }
+    try {
+      await axios.post(conf.FOREIGN_API + '/diary', body, config)
+    } catch (e) {
+      next(e)
+    }
   }
 
   if (id !== '') obj.user = id

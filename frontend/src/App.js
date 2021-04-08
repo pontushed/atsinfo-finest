@@ -52,7 +52,7 @@ const App = () => {
     }
   }, [])
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (userObject) {
       sectorConfService.getAll().then(data => {
         setSectorConfs(data)
@@ -61,7 +61,7 @@ const App = () => {
         setDiary(diary.concat(data))
       })
     }
-  }, [userObject])
+  }, [userObject]) */
 
   const initializeEventSource = () => {
     const events = new EventSource( API_URL + '/events')
@@ -96,6 +96,12 @@ const App = () => {
 
   useEffect(() => {
     if (!listening && userObject) {
+      sectorConfService.getAll().then(data => {
+        setSectorConfs(data)
+      })
+      diaryService.getAll().then(data => {
+        setDiary(data)
+      })
       initializeEventSource()
     }
   }, [listening, userObject])
