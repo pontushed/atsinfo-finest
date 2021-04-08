@@ -52,17 +52,6 @@ const App = () => {
     }
   }, [])
 
-  /*   useEffect(() => {
-    if (userObject) {
-      sectorConfService.getAll().then(data => {
-        setSectorConfs(data)
-      })
-      diaryService.getAll().then(data => {
-        setDiary(diary.concat(data))
-      })
-    }
-  }, [userObject]) */
-
   const initializeEventSource = () => {
     const events = new EventSource( API_URL + '/events')
 
@@ -94,14 +83,20 @@ const App = () => {
     }
   }
 
+  const initializeSectors = async () => {
+    const sectordata = await sectorConfService.getAll()
+    setSectorConfs(sectordata)
+    sectordata.forEach(item => {
+      console.log('Setting conf colors: ' + item.country + ', ' + item.title)
+      setConfInDisplay(item.country, item.title)
+    })
+    const diarydata = await diaryService.getAll()
+    setDiary(diarydata)
+  }
+
   useEffect(() => {
     if (!listening && userObject) {
-      sectorConfService.getAll().then(data => {
-        setSectorConfs(data)
-      })
-      diaryService.getAll().then(data => {
-        setDiary(data)
-      })
+      initializeSectors()
       initializeEventSource()
     }
   }, [listening, userObject])
@@ -149,10 +144,10 @@ const App = () => {
   const setConfInDisplay = (country, conf) => {
     const newSectorization = logic.sectorConfsColors(country, conf)
     if (country === 'EE') {
-      setSectorColors([{ ...newSectorization }, sectorColors[1]])
+      setSectorColors((sectorColors) => [{ ...newSectorization }, sectorColors[1]])
     }
     if (country === 'EF') {
-      setSectorColors([sectorColors[0], { ...newSectorization }])
+      setSectorColors(sectorColors => [sectorColors[0], { ...newSectorization }])
     }
   }
 

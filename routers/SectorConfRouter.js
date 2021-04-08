@@ -6,10 +6,10 @@ const SectorConf = require('../models/SectorConf')
 const sse = require('../utils/serverSideEvents')
 const axios = require('axios')
 
-sectorConfRouter.get('/', (req, res) => {
-  SectorConf.find({}).then(confs => {
-    res.json(confs)
-  })
+sectorConfRouter.get('/', async (req, res) => {
+  const latestEE = await SectorConf.findOne({ country:'EE' }).sort('-effectiveAt')
+  const latestEF = await SectorConf.findOne({ country:'EF' }).sort('-effectiveAt')
+  return res.json([latestEE].concat(latestEF))
 })
 
 sectorConfRouter.post('/', async (req, res, next) => {
