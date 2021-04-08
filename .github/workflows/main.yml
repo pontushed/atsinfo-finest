@@ -34,7 +34,7 @@ jobs:
       #     MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
       #     SECRET: ${{secrets.SECRET}}
       - name: lint backend
-        run: npm run lint
+        run: npm run eslint
       #- name: Cypress-run
       #  uses: cypress-io/github-action@v2
       #  with:
