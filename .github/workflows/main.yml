@@ -26,8 +26,8 @@ jobs:
       # - name: test frontend jest tests
       #   run: npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/components/*
       #   working-directory: frontend
-       - name: npm ci backend
-         run: npm ci
+      - name: npm ci backend
+        run: npm ci
       # - name: npm test backend
       #   run: npm run test
       #   env:
