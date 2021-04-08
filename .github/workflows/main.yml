@@ -21,7 +21,7 @@ jobs:
         run: npm ci
         working-directory: frontend
       - name: lint frontend
-        run: npm run lint
+        run: npm run eslint
         working-directory: frontend
       - name: test frontend jest tests
         run: npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/components/*
@@ -51,22 +51,24 @@ jobs:
       - name: Create coverage report
         run: bash <(curl -s https://codecov.io/bash)
       - name: Deploy Estonia
-        uses: akhileshns/heroku-deploy@v3.6.8
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'atsinfo-finest-est'
           heroku_email: 'pontus.hedlund@gmail.com'
         env:
-          MONGODB_URI_EST: ${{secrets.MONGODB_URI_EST}}
-          COUNTRY: Estonia
+          HD_MONGODB_URI_EST: ${{secrets.MONGODB_URI_EST}}
+          HD_COUNTRY: Estonia
           HD_SECRET: ${{secrets.SECRET}}
+          HD_API_URL: /api
       - name: Deploy Finland
-        uses: akhileshns/heroku-deploy@v3.6.8
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'atsinfo-finest-est'
+          heroku_app_name: 'atsinfo-finest-fin'
           heroku_email: 'pontus.hedlund@gmail.com'
         env:
-          MONGODB_URI_FIN: ${{secrets.MONGODB_URI_FIN}}
-          COUNTRY: Finland
+          HD_MONGODB_URI_FIN: ${{secrets.MONGODB_URI_FIN}}
+          HD_COUNTRY: Finland
           HD_SECRET: ${{secrets.SECRET}}
+          HD_API_URL: /api
