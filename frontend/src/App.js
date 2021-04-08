@@ -8,6 +8,7 @@ import DiaryMessage from './components/DiaryMessage'
 import SecConfMessage from './components/SecConfMessage'
 import './App.css'
 import logic from './logic/sectorConfs'
+import { API_URL } from './config'
 
 const initialSectorization = [
   {
@@ -63,7 +64,7 @@ const App = () => {
   }, [userObject])
 
   const initializeEventSource = () => {
-    const events = new EventSource('http://localhost:3001/api/events')
+    const events = new EventSource( API_URL + '/events')
 
     events.onopen = () => {
       console.log('The EventSource connection has been established.')
