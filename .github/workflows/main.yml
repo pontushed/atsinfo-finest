@@ -60,7 +60,7 @@ jobs:
           HD_MONGODB_URI_EST: ${{secrets.MONGODB_URI_EST}}
           HD_COUNTRY: Estonia
           HD_SECRET: ${{secrets.SECRET}}
-          HD_API_URL: /api
+          HD_REACT_APP_API_URL: /api
       - name: Deploy Finland
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -71,4 +71,4 @@ jobs:
           HD_MONGODB_URI_FIN: ${{secrets.MONGODB_URI_FIN}}
           HD_COUNTRY: Finland
           HD_SECRET: ${{secrets.SECRET}}
-          HD_API_URL: /api
+          HD_REACT_APP_API_URL: /api
