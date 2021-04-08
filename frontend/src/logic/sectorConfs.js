@@ -188,43 +188,43 @@
 const sectorConfs = (country, confName) => {
   if (country === 'EE') {
     switch (confName) {
-      case 'CONF1' : return [
-        ['eette', 'eettw', 'eettfed']
-      ]
-      case 'CF3A':
-      case 'CF3B':
-      case 'CF2': return [
-        ['eettw', 'eettfed'],
-        ['eette']
-      ]
-      case 'CF2A': return [
-        ['eettw', 'eette'],
-        ['eettfed']
-      ]
-      case 'CF5': return [
-        ['eettw'],
-        ['eette'],
-        ['eettfed']
-      ]
+    case 'CONF1' : return [
+      ['eette', 'eettw', 'eettfed']
+    ]
+    case 'CF3A':
+    case 'CF3B':
+    case 'CF2': return [
+      ['eettw', 'eettfed'],
+      ['eette']
+    ]
+    case 'CF2A': return [
+      ['eettw', 'eette'],
+      ['eettfed']
+    ]
+    case 'CF5': return [
+      ['eettw'],
+      ['eette'],
+      ['eettfed']
+    ]
     }
   }
   if (country === 'EF') {
     switch (confName) {
-      case 'CONF1': return [
-        ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf', 'efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
-      ]
-      case 'CONF2': return [
-        ['efina', 'efinb', 'efinc', 'efind'],
-        ['efine', 'efinf', 'efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
-      ]
-      case 'CONF2A': return [
-        ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf'],
-        ['efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
-      ]
-      case 'CONF2B': return [
-        ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf', 'efing'],
-        ['efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
-      ]
+    case 'CONF1': return [
+      ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf', 'efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
+    ]
+    case 'CONF2': return [
+      ['efina', 'efinb', 'efinc', 'efind'],
+      ['efine', 'efinf', 'efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
+    ]
+    case 'CONF2A': return [
+      ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf'],
+      ['efing', 'efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
+    ]
+    case 'CONF2B': return [
+      ['efina', 'efinb', 'efinc', 'efind', 'efine', 'efinf', 'efing'],
+      ['efinh', 'efinj', 'efink', 'efinl', 'efinm', 'efinn', 'efinv']
+    ]
     }
   }
   return []
@@ -233,96 +233,96 @@ const sectorConfs = (country, confName) => {
 const sectorConfsColors = (country, confName) => {
   if (country === 'EE') {
     switch (confName) {
-      case 'CONF1' : return {
-        eette: 0,
-        eettw: 0,
-        eettfed: 0
-      }
-      case 'CF3A':
-      case 'CF3B':
-      case 'CF2': return {
-        eette: 0,
-        eettw: 1,
-        eettfed: 1
-      }
-      case 'CF2A': return {
-        eette: 0,
-        eettw: 0,
-        eettfed: 1
-      }
-      case 'CF5': return {
-        eette: 0,
-        eettw: 1,
-        eettfed: 2
-      }
+    case 'CONF1' : return {
+      eette: 0,
+      eettw: 0,
+      eettfed: 0
+    }
+    case 'CF3A':
+    case 'CF3B':
+    case 'CF2': return {
+      eette: 0,
+      eettw: 1,
+      eettfed: 1
+    }
+    case 'CF2A': return {
+      eette: 0,
+      eettw: 0,
+      eettfed: 1
+    }
+    case 'CF5': return {
+      eette: 0,
+      eettw: 1,
+      eettfed: 2
+    }
     }
   }
   if (country === 'EF') {
     switch (confName) {
-      case 'CONF1': return {
-        efina: 0,
-        efinb: 0,
-        efinc: 0,
-        efind: 0,
-        efine: 0,
-        efinf: 0,
-        efing: 0,
-        efinh: 0,
-        efinj: 0,
-        efink: 0,
-        efinl: 0,
-        efinm: 0,
-        efinn: 0,
-        efinv: 0,
-      }
-      case 'CONF2': return {
-        efina: 0,
-        efinb: 0,
-        efinc: 0,
-        efind: 0,
-        efine: 1,
-        efinf: 1,
-        efing: 1,
-        efinh: 1,
-        efinj: 1,
-        efink: 1,
-        efinl: 1,
-        efinm: 1,
-        efinn: 1,
-        efinv: 1,
-      }
-      case 'CONF2A': return {
-        efina: 0,
-        efinb: 0,
-        efinc: 0,
-        efind: 0,
-        efine: 0,
-        efinf: 0,
-        efing: 1,
-        efinh: 1,
-        efinj: 1,
-        efink: 1,
-        efinl: 1,
-        efinm: 1,
-        efinn: 1,
-        efinv: 1,
-      }
-      case 'CONF2B': return {
-        efina: 0,
-        efinb: 0,
-        efinc: 0,
-        efind: 0,
-        efine: 0,
-        efinf: 0,
-        efing: 0,
-        efinh: 1,
-        efinj: 1,
-        efink: 1,
-        efinl: 1,
-        efinm: 1,
-        efinn: 1,
-        efinv: 1,
-      }
+    case 'CONF1': return {
+      efina: 0,
+      efinb: 0,
+      efinc: 0,
+      efind: 0,
+      efine: 0,
+      efinf: 0,
+      efing: 0,
+      efinh: 0,
+      efinj: 0,
+      efink: 0,
+      efinl: 0,
+      efinm: 0,
+      efinn: 0,
+      efinv: 0,
+    }
+    case 'CONF2': return {
+      efina: 0,
+      efinb: 0,
+      efinc: 0,
+      efind: 0,
+      efine: 1,
+      efinf: 1,
+      efing: 1,
+      efinh: 1,
+      efinj: 1,
+      efink: 1,
+      efinl: 1,
+      efinm: 1,
+      efinn: 1,
+      efinv: 1,
+    }
+    case 'CONF2A': return {
+      efina: 0,
+      efinb: 0,
+      efinc: 0,
+      efind: 0,
+      efine: 0,
+      efinf: 0,
+      efing: 1,
+      efinh: 1,
+      efinj: 1,
+      efink: 1,
+      efinl: 1,
+      efinm: 1,
+      efinn: 1,
+      efinv: 1,
+    }
+    case 'CONF2B': return {
+      efina: 0,
+      efinb: 0,
+      efinc: 0,
+      efind: 0,
+      efine: 0,
+      efinf: 0,
+      efing: 0,
+      efinh: 1,
+      efinj: 1,
+      efink: 1,
+      efinl: 1,
+      efinm: 1,
+      efinn: 1,
+      efinv: 1,
+    }
     }
   }
   return null

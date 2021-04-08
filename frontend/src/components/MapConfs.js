@@ -22,24 +22,24 @@ const MapConfs = ({ colors }) => {
   const secColorsEF = colors[1]
 
   return (
-    <svg height="394.92pt" version="1.1" viewBox="0 0 201.742929 394.92" width="201.742929pt" style={{strokeLinecap:'butt', strokeLinejoin:'round'}}>
+    <svg height="394.92pt" version="1.1" viewBox="0 0 201.742929 394.92" width="201.742929pt" style={{ strokeLinecap:'butt', strokeLinejoin:'round' }}>
       <g id="figure_1">
         <g id="patch_1">
-          <path d="M 0 394.92 
-          L 201.742929 394.92 
-          L 201.742929 0 
-          L 0 0 
+          <path d="M 0 394.92
+          L 201.742929 394.92
+          L 201.742929 0
+          L 0 0
           z
-          " style={{fill:'none'}}/>
+          " style={{ fill:'none' }}/>
         </g>
         <g id="axes_1">
-        <g id="patch_2">
-          <path d="M 194.542929 7.2 
-          L 194.542929 387.72 
-          L 7.2 387.72 
-          L 7.2 7.2 
-          L 194.542929 7.2 
-          " style={{fill:'none'}} />
+          <g id="patch_2">
+            <path d="M 194.542929 7.2
+          L 194.542929 387.72
+          L 7.2 387.72
+          L 7.2 7.2
+          L 194.542929 7.2
+          " style={{ fill:'none' }} />
           </g>
           {/* Here are the sector polygons */}
           <EETTE color={secColorsEE.eette}/>
@@ -60,16 +60,16 @@ const MapConfs = ({ colors }) => {
           <EFINN color={secColorsEF.efinn}/>
           <EFINV color={secColorsEF.efinv}/>
         </g>
-      </g>  
+      </g>
       <defs>
-          <clipPath id="pc284ee2ed3">
-              <path d="M 194.542929 7.2 
-                L 194.542929 387.72 
-                L 7.2 387.72 
-                L 7.2 7.2 
-                L 194.542929 7.2 
+        <clipPath id="pc284ee2ed3">
+          <path d="M 194.542929 7.2
+                L 194.542929 387.72
+                L 7.2 387.72
+                L 7.2 7.2
+                L 194.542929 7.2
                 " />
-          </clipPath>
+        </clipPath>
       </defs>
     </svg>
   )

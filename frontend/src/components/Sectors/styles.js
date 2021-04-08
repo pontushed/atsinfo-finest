@@ -16,7 +16,7 @@ const getFillStyle = (colorNumber) => {
 }
 
 const getFillStyleEE = (colorNumber) => {
-  let fillColors = ['#3298dc','#00d1b2','#ffe08a'] 
+  let fillColors = ['#3298dc','#00d1b2','#ffe08a']
   return {
     fill: fillColors[colorNumber],
     stroke: '#000000',

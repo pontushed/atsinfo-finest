@@ -64,7 +64,7 @@ const App = () => {
 
   const initializeEventSource = () => {
     const events = new EventSource('http://localhost:3001/api/events')
-    
+
     events.onopen = () => {
       console.log('The EventSource connection has been established.')
       setEventSrc(events)
@@ -72,9 +72,9 @@ const App = () => {
     }
 
     events.onmessage = (event) => {
-      if (event.id == "CLOSE") {
+      if (event.id === 'CLOSE') {
         events.close()
-        setListening(false) 
+        setListening(false)
       }
       const parsedData = JSON.parse(event.data)
       if (parsedData.type === 'diary') {
@@ -133,7 +133,7 @@ const App = () => {
       country,
       effectiveAt: new Date().toUTCString(),
       issuer: userObject.username,
-      comment: ''      
+      comment: ''
     }
     await sectorConfService.create(confObject)
     setConfInDisplay(country, conf)
@@ -141,47 +141,47 @@ const App = () => {
 
   const setConfInDisplay = (country, conf) => {
     const newSectorization = logic.sectorConfsColors(country, conf)
-    if (country == 'EE') {
-      setSectorColors([{...newSectorization}, sectorColors[1]])
+    if (country === 'EE') {
+      setSectorColors([{ ...newSectorization }, sectorColors[1]])
     }
-    if (country == 'EF') {
-      setSectorColors([sectorColors[0], {...newSectorization}])
+    if (country === 'EF') {
+      setSectorColors([sectorColors[0], { ...newSectorization }])
     }
   }
 
   const LoggedOut = () => (
     <div className="columns is-centered">
-          <div className="column is-half">
-            <article className="message is-info">
-              <div className="message-header">
-                <p>Welcome! Please log in.</p>
-              </div>
-              <div className="message-body">
-                <div className="content">
-                  <form>
-                  <div className="field">
-                    <label className="label">Username</label>
-                    <div className="control">
-                      <input className="input" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Password</label>
-                    <div className="control">
-                      <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      <button type="submit" className="button is-primary is-large"  onClick={(e) => handleLogin(e)}>Login</button>
-                    </div>
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </article>
+      <div className="column is-half">
+        <article className="message is-info">
+          <div className="message-header">
+            <p>Welcome! Please log in.</p>
           </div>
-        </div>
+          <div className="message-body">
+            <div className="content">
+              <form>
+                <div className="field">
+                  <label className="label">Username</label>
+                  <div className="control">
+                    <input className="input" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Password</label>
+                  <div className="control">
+                    <input className="input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <button type="submit" className="button is-primary is-large"  onClick={(e) => handleLogin(e)}>Login</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
   )
 
   const LoggedIn = () => (
@@ -251,16 +251,16 @@ const App = () => {
       <div className="columns is-centered">
         <div className="column is-half">
           <div className="level">
-          <span>Logged in as <strong>{userObject.username}</strong></span>
-          <button className="button is-small" onClick={() => handleLogout()}>Logout</button>
-          <span>Listening on Event Stream: {listening ? 'YES' : 'NO'}</span>
-          {!listening && (<button className="button is-small is-danger" onClick={() => setListening(null)}>Reconnect</button>)}
+            <span>Logged in as <strong>{userObject.username}</strong></span>
+            <button className="button is-small" onClick={() => handleLogout()}>Logout</button>
+            <span>Listening on Event Stream: {listening ? 'YES' : 'NO'}</span>
+            {!listening && (<button className="button is-small is-danger" onClick={() => setListening(null)}>Reconnect</button>)}
           </div>
         </div>
       </div>
     </>
   )
-  
+
   return (
     <div className="section">
       <div className="container">
