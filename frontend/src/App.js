@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 //import Notification from './components/Notification'
 import loginService from './services/login'
 import sectorConfService from './services/sectorconf'
-import diaryService from './services/diary'
+//import diaryService from './services/diary'
 import MapConfs from './components/MapConfs'
-import DiaryMessage from './components/DiaryMessage'
+//import DiaryMessage from './components/DiaryMessage'
 import SecConfMessage from './components/SecConfMessage'
 import './App.css'
 import logic from './logic/sectorConfs'
@@ -37,7 +37,7 @@ const initialSectorization = [
 const App = () => {
   const [ listening, setListening ] = useState(false)
   const [ sectorconfs, setSectorConfs] = useState([])
-  const [ diary, setDiary ] = useState([])
+  //const [ diary, setDiary ] = useState([])
   const [ userObject, setUserObject] = useState(null)
   const [ username, setUsername] = useState('')
   const [ password, setPassword] = useState('')
@@ -67,9 +67,9 @@ const App = () => {
         setListening(false)
       }
       const parsedData = JSON.parse(event.data)
-      if (parsedData.type === 'diary') {
+      /* if (parsedData.type === 'diary') {
         setDiary((diary) => [parsedData.message].concat(diary))
-      }
+      } */
       if (parsedData.type === 'secConf') {
         setSectorConfs((sectorconfs) => [parsedData].concat(sectorconfs))
         setConfInDisplay(parsedData.country, parsedData.title)
@@ -90,8 +90,8 @@ const App = () => {
       console.log('Setting conf colors: ' + item.country + ', ' + item.title)
       setConfInDisplay(item.country, item.title)
     })
-    const diarydata = await diaryService.getAll()
-    setDiary(diarydata)
+    // const diarydata = await diaryService.getAll()
+    // setDiary(diarydata)
   }
 
   useEffect(() => {
