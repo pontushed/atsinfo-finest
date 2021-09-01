@@ -188,65 +188,36 @@ const App = () => {
 
   const LoggedIn = () => (
     <>
-      <div className="columns is-centered">
-        <div className="column">
-          <div className="card">
-            <header className="card-header has-background-info">
-              <p className="card-header-title is-centered has-text-white">
-                Diary
-              </p>
-            </header>
-            <div className="card-content">
-              <div className="content">
-                {diary.slice(0,10).map((item,index) => (
-                  <DiaryMessage key={index} msg={item}/>
-                )
-                )}
-              </div>
-            </div>
-            <footer className="card-footer">
-              <a href="#" className="card-footer-item">Button1</a>
-              <a href="#" className="card-footer-item">Button2</a>
-              <a href="#" className="card-footer-item">Button3</a>
-            </footer>
-          </div>
-        </div>
-        <div className="column">
-          <div className="card">
-            <header className="card-header has-background-info">
-              <p className="card-header-title is-centered has-text-white">
+      <div className="section">
+        <div className="card">
+          <header className="card-header has-background-info">
+            <p className="card-header-title is-centered has-text-white">
                 Sector Configuration
-              </p>
-            </header>
-            <div className="card-content">
-              <div className="columns">
-                <div className="column">
-                  <MapConfs colors={sectorColors}/>
-                </div>
-                <div className="column">
-                  <p>EFIN</p>
-                  <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF1')}>CONF1</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2')}>CONF2</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2A')}>CONF2A</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2B')}>CONF2B</button>
-                  <p>EETT</p>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CONF1')}>CONF1</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF2')}>CF2</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF2A')}>CF2A</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3A')}>CF3A</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3B')}>CF3B</button>
-                  <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF5')}>CF5</button>
-                  {sectorconfs.slice(0,10).map((item,index) => (
-                    <SecConfMessage key={index} msg={item}/>
-                  ))}
-                </div>
+            </p>
+          </header>
+          <div className="card-content">
+            <div className="columns">
+              <div className="column">
+                <MapConfs colors={sectorColors}/>
+              </div>
+              <div className="column">
+                <p>EFIN</p>
+                <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF1')}>CONF1</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2')}>CONF2</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2A')}>CONF2A</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EF', 'CONF2B')}>CONF2B</button>
+                <p>EETT</p>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CONF1')}>CONF1</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF2')}>CF2</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF2A')}>CF2A</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3A')}>CF3A</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF3B')}>CF3B</button>
+                <button className="button is-small" onClick={() => handleChangeConf('EE', 'CF5')}>CF5</button>
+                {sectorconfs.slice(0,10).map((item,index) => (
+                  <SecConfMessage key={index} msg={item}/>
+                ))}
               </div>
             </div>
-            <footer className="card-footer">
-              <a href="#" className="card-footer-item">Button1</a>
-              <a href="#" className="card-footer-item">Button2</a>
-              <a href="#" className="card-footer-item">Button3</a>
-            </footer>
           </div>
         </div>
       </div>
